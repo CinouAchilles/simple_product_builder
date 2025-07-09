@@ -10,7 +10,7 @@ function App() {
       //   product.colors.length > 4
       //     ? [...product.colors.slice(0, 4), "..."]
       //     : product.colors;
-      
+
   const renderProducts = ()=>{
     return dummyProducts.map((product)=>
         <ProductCard
@@ -31,7 +31,7 @@ function App() {
   return (
     <div>
       <h1 className='bg-red-200'>React Ts</h1>
-      <div className='mt-5 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1  gap-4 ' >
+      <div className='mt-5 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 p-4  gap-4 ' >
         {renderProducts()}
       </div>
     </div>
