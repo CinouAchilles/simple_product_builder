@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* Remove global margin and padding reset to allow Tailwind spacing utilities to work */
+/*
 *{
   box-sizing: border-box;
   margin: 0;
@@ -9,3 +11,4 @@ body{
   margin: 0;
   padding: 0;
 }
+*/
