@@ -56,7 +56,7 @@ export const dummyProducts: IProduct[] = [
         id: uuid(),
         name: 'Eco Water Bottle',
         description: 'lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        imageUrl: 'https://placehold.co/300x200?text=Water+Bottle',
+        imageUrl: 'https://placehold.co/400x400?text=Water+Bottle',
         price: 25000.0,
         stockStatus: 'In Stock',
         colors: ['Green', 'Blue', 'Black' , "Red" , "Yellow", "Pink", "Purple", "Orange", "Gray", "White" , "Brown", "Cyan", "Magenta", "Lime", "Teal", "Navy", "Olive", "Maroon", "Silver", "Gold"],
