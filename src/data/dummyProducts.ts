@@ -66,28 +66,28 @@ export const dummyProducts: IProduct[] = [
 
 export const inputFieldList: IinputField[] = [
     {
-        id: "title",
-        name: "title",
+        id: "name",
+        name: "name",
         type: "text",
-        label: "Title",
+        label: "Product Name",
     },
     {
         id: "description",
         name: "description",
         type: "text",
-        label: "Description",
+        label: "Product Description",
     },
     {
         id: "imageUrl",
         name: "imageUrl",
         type: "text",
-        label: "Image URL",
+        label: "Product Image URL",
     },
     {
         id: "price",
         name: "price",
         type: "string",
-        label: "Price",
+        label: "Product Price",
     },
     
 

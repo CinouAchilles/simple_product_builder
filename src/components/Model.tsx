@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
+import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 import type { ReactNode } from 'react';
 
 interface Iprops {
@@ -41,7 +41,7 @@ export default function Model(props: Iprops) {
                                 Your payment has been successfully submitted. We’ve sent you an email with all of the details of your
                                 order.
                             </p>
-                            <div className="mt-4 flex flex-col items-center justify-between gap-2">
+                            <div className="mt-4 flex flex-col items-center justify-between ">
 
                                 {children}
                             </div>
