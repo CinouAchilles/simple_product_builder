@@ -11,3 +11,9 @@ export interface IProduct {
         imageUrl: string
     };
 }
+export interface IinputField{
+    id: string;
+    name: string;
+    type: string;
+    label: string;
+}
