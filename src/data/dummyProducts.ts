@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import type { IProduct } from "../interfaces/Iproduct";
+import type { IinputField, IProduct } from "../interfaces/Iproduct";
 
 export const dummyProducts: IProduct[] = [
     {
@@ -63,3 +63,32 @@ export const dummyProducts: IProduct[] = [
         category: { name: 'Lifestyle', imageUrl: 'https://placehold.co/100x100?text=Lifestyle' }
     }
 ];
+
+export const inputFieldList: IinputField[] = [
+    {
+        id: "title",
+        name: "title",
+        type: "text",
+        label: "Title",
+    },
+    {
+        id: "description",
+        name: "description",
+        type: "text",
+        label: "Description",
+    },
+    {
+        id: "imageUrl",
+        name: "imageUrl",
+        type: "text",
+        label: "Image URL",
+    },
+    {
+        id: "price",
+        name: "price",
+        type: "string",
+        label: "Price",
+    },
+    
+
+]
