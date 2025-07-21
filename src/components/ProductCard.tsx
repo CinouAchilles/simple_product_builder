@@ -3,14 +3,19 @@ import { formatColorsSlicing, formatTextSlicing } from "../utils/functions";
 import ButtonComp from "./ButtonComp";
 import ImageComp from "./ImageComp";
 
-export default function ProductCard(props: IProduct) {
+type ProductCardProps = IProduct & {
+  openModal: () => void;
+};
+
+export default function ProductCard(props: ProductCardProps) {
   const {
     name,
     description,
     price,
     stockStatus,
     imageUrl,
-    colors
+    colors,
+    openModal,
   } = props;
 
   return (
@@ -47,7 +52,7 @@ export default function ProductCard(props: IProduct) {
 
         <div>
           <div className="flex items-center justify-between mb-4">
-            <span className="text-lg font-bold text-gray-900">${price.toFixed(2) ?? "0.00"}</span>
+            <span className="text-lg font-bold text-gray-900">${(typeof price === "number" ? price : parseFloat(price)).toFixed(2) || "0.00"}</span>
             <span className={`text-sm px-2 py-1 rounded-full ${stockStatus === "In Stock"
                 ? "bg-green-100 text-green-800"
                 : "bg-red-100 text-red-800"
@@ -62,6 +67,7 @@ export default function ProductCard(props: IProduct) {
               btntext="Edit"
               onClick={() => {
                 console.log("Edit button clicked");
+                openModal();
               }}
             />
             <ButtonComp

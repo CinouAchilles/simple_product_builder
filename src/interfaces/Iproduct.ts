@@ -3,7 +3,7 @@ export interface IProduct {
     name: string;
     description: string;
     imageUrl: string;
-    price: number;
+    price: string | number;
     stockStatus: 'In Stock' | 'Out of Stock';
     colors: string[];
     category: {
@@ -13,7 +13,7 @@ export interface IProduct {
 }
 export interface IinputField{
     id: string;
-    name: string;
+    name: "name" | "description" | "imageUrl" | "price",
     type: string;
     label: string;
 }
