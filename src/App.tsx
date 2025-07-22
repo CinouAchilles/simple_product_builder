@@ -7,26 +7,29 @@ import "./index.css"
 import ButtonComp from './components/ButtonComp'
 import InputForm from './components/InputForm'
 import type { IProduct } from './interfaces/Iproduct'
+import { validateInput } from './validation'
 
 function App() {
 
-  const [isOpen, setIsOpen] = useState(false)
-
-  const [productData, setProductData] = useState<IProduct>({
+  const defaultValues: IProduct = {
     id: '',
     name: '',
     description: '',
     imageUrl: '',
     price: '',
-    stockStatus: 'In Stock',
+    stockStatus: "In Stock",
     colors: [],
     category: {
       name: '',
       imageUrl: ''
     }
-  })
-  const onChangeHandler =(e: React.ChangeEvent<HTMLInputElement>)=>{
-    const {name , value} = e.target;
+  }
+
+  const [isOpen, setIsOpen] = useState(false)
+
+  const [productData, setProductData] = useState<IProduct>(defaultValues)
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     setProductData({
       ...productData,
       [name]: value
@@ -63,9 +66,9 @@ function App() {
       />
     )
   }
-  const renderInputFields = inputFieldList.map((input, index) => (
+  const renderInputFields = inputFieldList.map((input) => (
     <div
-      key={index}
+      key={input.id}
       className="mb-3 flex flex-col transition-all duration-200 hover:scale-[100.5%] py-1 rounded-lg"
     >
       <label
@@ -96,8 +99,18 @@ function App() {
         <div className='w-full mt-3 flex items-center gap-3 '>
           <ButtonComp btntext='Submit' classname="bg-blue-500 hover:bg-blue-600 " onClick={() => {
             console.log(productData);
+            const errors = validateInput({
+              name: productData.name,
+              description: productData.description,
+              imageUrl: productData.imageUrl,
+              price: String(productData.price)
+            });
+            console.log(errors);
           }} />
-          <ButtonComp btntext='cancel' classname='bg-gray-600 hover:bg-gray-700' onClick={closeModal} />
+          <ButtonComp btntext='cancel' classname='bg-gray-600 hover:bg-gray-700' onClick={()=>{
+            closeModal();
+            setProductData(defaultValues);
+          }} />
         </div>
       </Model>
       <h1 className='bg-red-200'>React Ts</h1>
