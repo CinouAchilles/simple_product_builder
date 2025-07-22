@@ -19,7 +19,7 @@ export default function Model(props: Iprops) {
     return (
         <>
 
-            
+
             <Dialog open={isOpen} as="div" className="relative z-10 focus:outline-none" onClose={closeModal}>
                 <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
                     {/* Background overlay */}
@@ -41,11 +41,16 @@ export default function Model(props: Iprops) {
                                 Your payment has been successfully submitted. We’ve sent you an email with all of the details of your
                                 order.
                             </p>
-                            <div className="mt-4 flex flex-col items-center justify-between ">
 
+                            
+
+                            <div className="mt-4 flex flex-col items-center justify-between ">
+                                
                                 {children}
                             </div>
                             
+
+
                         </DialogPanel>
                     </div>
                 </div>

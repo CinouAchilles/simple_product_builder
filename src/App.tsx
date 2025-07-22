@@ -7,9 +7,10 @@ import ProductCard from './components/ProductCard'
 import ButtonComp from './components/ButtonComp'
 import InputForm from './components/InputForm'
 
-import { dummyProducts, inputFieldList } from './data/dummyProducts'
+import { colorsList, dummyProducts, inputFieldList } from './data/dummyProducts'
 import type { IProduct } from './interfaces/Iproduct'
 import { validateInput } from './validation'
+import ColorsRound from './components/ColorsRound'
 
 function App() {
   // 🔷 Default Product Structure
@@ -134,6 +135,7 @@ function App() {
       >
         <form className="w-full bg-white " onSubmit={(e) => e.preventDefault()}>
           {renderInputFields}
+          <ColorsRound colors={colorsList} />
         </form>
         <div className='w-full mt-3 flex items-center gap-3 '>
           <ButtonComp
