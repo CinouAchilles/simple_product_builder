@@ -59,7 +59,7 @@ export const dummyProducts: IProduct[] = [
         imageUrl: 'https://placehold.co/400x400?text=Water+Bottle',
         price: 25000.0,
         stockStatus: 'In Stock',
-        colors: ['Green', 'Blue', 'Black' , "Red" , "Yellow", "Pink", "Purple", "Orange", "Gray", "White" , "Brown", "Cyan", "Magenta", "Lime", "Teal", "Navy", "Olive", "Maroon", "Silver", "Gold"],
+        colors: ['Green', 'Blue', 'Black', "Red", "Yellow", "Pink", "Purple", "Orange", "Gray", "White", "Brown", "Cyan", "Magenta", "Lime", "Teal", "Navy", "Olive", "Maroon", "Silver", "Gold"],
         category: { name: 'Lifestyle', imageUrl: 'https://placehold.co/100x100?text=Lifestyle' }
     }
 ];
@@ -89,6 +89,10 @@ export const inputFieldList: IinputField[] = [
         type: "string",
         label: "Product Price",
     },
-    
+
 
 ]
+
+export const colorsList: string[] = [
+    "Black", "White", "Red", "Blue", "Green", "Yellow", "Gray", "Brown"
+];
