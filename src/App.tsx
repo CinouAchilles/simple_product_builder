@@ -32,6 +32,7 @@ function App() {
   const [isOpen, setIsOpen] = useState(false)
   const [errors, setErrors] = useState<Partial<IProduct>>({})
   const [productData, setProductData] = useState<IProduct>(defaultValues)
+  const [availableColors, setAvailableColors] = useState<string[]>(colorsList.filter(c => !productData.colors.includes(c)))
 
   // 🔷 Handlers
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,6 +78,16 @@ function App() {
     closeModal()
     setProductData(defaultValues)
     setErrors({})
+  }
+
+  // Color move handlers
+  const handleAddColor = (color: string) => {
+    setProductData(prev => ({ ...prev, colors: [...prev.colors, color] }))
+    setAvailableColors(prev => prev.filter(c => c !== color))
+  }
+  const handleRemoveColor = (color: string) => {
+    setProductData(prev => ({ ...prev, colors: prev.colors.filter(c => c !== color) }))
+    setAvailableColors(prev => [...prev, color])
   }
 
   // 🔷 Renderers
@@ -135,7 +146,10 @@ function App() {
       >
         <form className="w-full bg-white " onSubmit={(e) => e.preventDefault()}>
           {renderInputFields}
-          <ColorsRound colors={colorsList} />
+          <p className='inline mr-2'>Available Colors:</p>
+          <ColorsRound colors={productData.colors} onColorClick={handleRemoveColor} />
+          <p className='text-xs text-gray-500 my-2'>Click on a color to select it</p>
+          <ColorsRound colors={availableColors} onColorClick={handleAddColor} />
         </form>
         <div className='w-full mt-3 flex items-center gap-3 '>
           <ButtonComp
