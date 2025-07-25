@@ -1,12 +1,14 @@
 interface IProps {
     colors: string[];
+    children?: React.ReactNode;
     onColorClick?: (color: string) => void;
 }
 
 export default function ColorsRound(props: IProps) {
-    const { colors, onColorClick } = props;
+    const { colors, onColorClick , children } = props;
     return (
         <div className={`${colors.length === 0 ? "inline" : "flex items-center gap-2"} my-3`}>
+            {children}
             {colors && colors.map((color) => (
                 <span
                     key={color}

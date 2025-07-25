@@ -11,6 +11,7 @@ import { colorsList, dummyProducts, inputFieldList } from './data/dummyProducts'
 import type { IProduct } from './interfaces/Iproduct'
 import { validateInput } from './validation'
 import ColorsRound from './components/ColorsRound'
+import { v4 as uuid } from 'uuid'
 
 function App() {
   // 🔷 Default Product Structure
@@ -33,15 +34,29 @@ function App() {
   const [errors, setErrors] = useState<Partial<IProduct>>({})
   const [productData, setProductData] = useState<IProduct>(defaultValues)
   const [availableColors, setAvailableColors] = useState<string[]>(colorsList.filter(c => !productData.colors.includes(c)))
+  const [availableProduct, setAvailableProduct] = useState(dummyProducts);
+
+  // 🔷 Validation Helper
+  const validateAndSetErrors = (data: IProduct): Partial<IProduct> => {
+    const validationErrors = validateInput({
+      name: data.name,
+      description: data.description,
+      imageUrl: data.imageUrl,
+      price: String(data.price)
+    });
+    setErrors(validationErrors);
+    return validationErrors;
+  }
 
   // 🔷 Handlers
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setProductData({
+    const updatedProduct = {
       ...productData,
       [name]: value
-    })
-    checkForErrors()
+    };
+    setProductData(updatedProduct);
+    validateAndSetErrors(updatedProduct);
   }
 
   const closeModal = () => {
@@ -52,32 +67,27 @@ function App() {
     setIsOpen(true)
   }
 
-  const checkForErrors = () => {
-    const errors = validateInput({
-      name: productData.name,
-      description: productData.description,
-      imageUrl: productData.imageUrl,
-      price: String(productData.price)
-    })
-    setErrors(errors)
-    console.log(errors)
-
-    if (Object.keys(errors).length > 0) {
-      console.log(Object.keys(errors))
-      return
-    }
-  }
-
   const handleSubmit = () => {
-    console.log(productData)
-    checkForErrors()
-    //from here an a go u can submit the data to ur server or API
+    const validationErrors = validateAndSetErrors(productData);
+    if (Object.keys(validationErrors).length > 0) {
+      console.log("Errors found, cannot submit");
+      return;
+    }
+    setAvailableProduct([
+      ...availableProduct,
+      { ...productData, id: uuid() }
+    ]);
+    setProductData(defaultValues);
+    setAvailableColors(colorsList.filter(c => !defaultValues.colors.includes(c)));
+    setErrors({});
+    closeModal();
   }
 
   const handleCancel = () => {
-    closeModal()
-    setProductData(defaultValues)
-    setErrors({})
+    closeModal();
+    setProductData(defaultValues);
+    setErrors({});
+    setAvailableColors(colorsList.filter(c => !defaultValues.colors.includes(c)));
   }
 
   // Color move handlers
@@ -92,7 +102,7 @@ function App() {
 
   // 🔷 Renderers
   const renderProducts = () => {
-    return dummyProducts.map((product) => (
+    return availableProduct.map((product) => (
       <ProductCard
         key={product.id}
         id={product.id}
@@ -146,26 +156,33 @@ function App() {
       >
         <form className="w-full bg-white " onSubmit={(e) => e.preventDefault()}>
           {renderInputFields}
-          <p className='inline mr-2'>Available Colors:</p>
-          <ColorsRound colors={productData.colors} onColorClick={handleRemoveColor} />
+          <ColorsRound colors={productData.colors} onColorClick={handleRemoveColor} >
+            <p className='inline mr-2'>Available Colors:</p>
+          </ColorsRound>
           <p className='text-xs text-gray-500 my-2'>Click on a color to select it</p>
           <ColorsRound colors={availableColors} onColorClick={handleAddColor} />
+          <div className='w-full mt-3 flex items-center gap-3 '>
+            <ButtonComp
+              btntext='Submit'
+              classname="bg-blue-500 hover:bg-blue-600 "
+              onClick={handleSubmit}
+            />
+            <ButtonComp
+              btntext='Cancel'
+              classname='bg-gray-600 hover:bg-gray-700'
+              onClick={handleCancel}
+            />
+          </div>
         </form>
-        <div className='w-full mt-3 flex items-center gap-3 '>
-          <ButtonComp
-            btntext='Submit'
-            classname="bg-blue-500 hover:bg-blue-600 "
-            onClick={handleSubmit}
-          />
-          <ButtonComp
-            btntext='Cancel'
-            classname='bg-gray-600 hover:bg-gray-700'
-            onClick={handleCancel}
-          />
-        </div>
       </Model>
 
       <h1 className='bg-red-200'>React Ts</h1>
+      <p className='text-gray-600'>A simple product management app</p>
+      <ButtonComp
+        btntext='Add Product'
+        classname='bg-green-500 hover:bg-green-600'
+        onClick={openModal}
+      />
 
       <div className='mt-5 grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 p-4 gap-4 md:gap-6'>
         {renderProducts()}
