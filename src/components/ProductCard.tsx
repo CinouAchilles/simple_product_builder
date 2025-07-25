@@ -27,7 +27,7 @@ export default function ProductCard(props: ProductCardProps) {
       />
 
       <div className="flex flex-col justify-between flex-grow mt-3 sm:mt-4">
-        <div className="fuck min-h-[130px] flex flex-col justify-between">
+        <div className="product-details min-h-[130px] flex flex-col justify-between">
           <div>
             <h3 className="text-lg font-bold text-gray-800 mb-1">{name}</h3>
             <p className="text-gray-600 text-sm mb-3">{formatTextSlicing(description, 75)}</p>
@@ -37,13 +37,15 @@ export default function ProductCard(props: ProductCardProps) {
             {
               formatColorsSlicing(colors).map((color, idx) => (
                 <span
-                  key={idx}
+                  key={color + idx}
                   className="w-5 h-5 rounded-full cursor-pointer transition-transform hover:scale-110"
                   style={{
                     backgroundColor: color,
                     border: "1px solid #e5e7eb",
                     boxShadow: "0 1px 2px rgba(0,0,0,0.1)"
                   }}
+                  aria-label={`Color: ${color}`}
+                  title={color}
                 />
               ))
             }
