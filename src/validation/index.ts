@@ -29,7 +29,7 @@ export const validateInput = (data: IValidationInput) => {
     }
 
     // Image URL: must be a valid URL (basic check)
-    const urlRegex = /^(https?|ftp):\/\/[^\s]+$/i;
+    const urlRegex = /^(https?|ftp|http):\/\/[^\s]+$/i;
     if (!data.imageUrl.trim()) {
         errors.imageUrl = "Image URL is required";
     } else if (!urlRegex.test(data.imageUrl.trim())) {
